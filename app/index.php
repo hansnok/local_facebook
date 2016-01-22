@@ -25,6 +25,7 @@
  * @copyright  2015 Mihail Pozarski (mipozarski@alumnos.uai.cl)
  * @copyright  2015 Hans Jeria (hansjeria@gmail.com)
  * @copyright  2016 Mark Michaelsen (mmichaelsen678@gmail.com)
+ * @copyright  2016 Andrea Villarroel (avillarroel@alumnos.uai.cl)
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -38,7 +39,7 @@ use Facebook\FacebookRedirectLoginHelper;
 use Facebook\FacebookRequire;
 include "htmltoinclude/bootstrap.html";
 include "htmltoinclude/javascriptindex.html";
-
+/*
 //gets all facebook information needed
 $appid = $CFG->fbkAppID;
 $secretid = $CFG->fbkScrID;
@@ -77,7 +78,7 @@ $facebook_id = $user_profile["id"];
 $app_name= $CFG->fbkAppNAME;
 $app_email= $CFG->fbkemail;
 $tutorial_name=$CFG->fbktutorialsN;
-$tutorial_link=$CFG->fbktutorialsL;
+$tutorial_link=$CFG->fbktutorialsL;*/
 $messageurl= new moodle_url('/message/edit.php');
 $connecturl= new moodle_url('/local/facebook/connect.php');
 
@@ -85,11 +86,11 @@ $connecturl= new moodle_url('/local/facebook/connect.php');
 include 'htmltoinclude/sidebar.html';
 
 //search for the user facebook information
-$userfacebookinfo = $DB->get_record('facebook_user',array('facebookid'=>$facebook_id,'status'=>1));
+$userfacebookinfo = $DB->get_record('facebook_user',array('moodleid'=>2,'status'=>1));
 
 // if the user exist then show the app, if not tell him to connect his facebook account
 if ($userfacebookinfo != false) {
-	$moodleid = $userfacebookinfo->moodleid;
+	$moodleid = 2;
 	$lastvisit = $userfacebookinfo->lasttimechecked;
 	$user_info = $DB->get_record('user', array(
 			'id'=>$moodleid
@@ -110,6 +111,7 @@ if ($userfacebookinfo != false) {
 	$dataarray = get_data_post_resource_link($sqlin, $param);
 
 	//foreach that generates each course square
+	echo'<div style="line-height: 4px"><br></div>';
 	foreach($usercourse as $courses){
 			
 		$fullname = $courses->fullname;
@@ -133,15 +135,15 @@ if ($userfacebookinfo != false) {
 				<p class="name" style="color: black; font-weight:bold; text-decoration: none; font-size:15px;">
 				<img src="images/lista_curso.png">'.$fullname.'</p></a></div>';*/
 		echo '<div class="block" style="height: 4em;"><button type="button" class="btn btn-info btn-lg" style="white-space: normal; width: 90%; height: 90%; border: 1px solid lightgray; background: linear-gradient(white, gainsboro);" courseid="'.$courseid.'" fullname="'.$fullname.'" component="button">';
-		
 		// If there is something to notify, show the number of new things
 		if ($totals>0){
-			echo '<span class="badge" style="color: white; background-color: red; position: relative; right: -80px; top: -15px;" courseid="c'.$courseid.'" component="button">'.$totals.'</span>';
+			echo '<p class="name" style="position: relative; height: 3em; overflow: hidden; color: black; font-weight: bold; text-decoration: none; font-size:13px; word-wrap: initial;" courseid="'.$courseid.'" component="button">
+				'.$fullname.'</p><span class="badge" style="color: white; background-color: red; position: relative; right: -58%; top: -64px; margin-right:9%;" courseid="'.$courseid.'" component="button">'.$totals.'</span></button></div>';
 		}
-		echo '<p class="name" style="height: 3em; overflow-y: hidden; color: black; font-weight: bold; text-decoration: none; font-size:13px; word-wrap: initial;" courseid="'.$courseid.'" component="button">
-				'.$fullname.'</p></button></div>';
-		
-		
+		else {
+			echo '<p class="name" style="position: relative; height: 3em; overflow: hidden; color: black; font-weight: bold; text-decoration: none; font-size:13px; word-wrap: initial;" courseid="'.$courseid.'" component="button">
+				'.$fullname.'</p></button></div>';	
+		}
 		//include "htmltoinclude/tableheaderindex.html";
 	}
 	echo "<p></p>";
@@ -158,12 +160,11 @@ if ($userfacebookinfo != false) {
 		$courseid = $courses->id;
 		
 		?>
-      	<div style="display: none;" id="c<?php echo $courseid; ?>">
-      		
-      		<div class="panel panel-default">
-      		
+      	<div style="display: none;" id="c<?php echo $courseid; ?>">     		
+      		<div class="panel panel-default">      		
 			  	<div class="panel"><nav>
-				  <ul><p><b style="font-size: 100%; color: #727272;"><?php echo $fullname; ?></b></p></ul>
+				  <ul><p class="small;"></p><p><b style="font-size: 120%; color: #727272;"><?php echo $fullname; ?></b></p>
+				  </ul>
 				  <ul class="pagination pagination-sm">
     				<li>
       					<a href="#" aria-label="Previous">
@@ -183,15 +184,15 @@ if ($userfacebookinfo != false) {
   				</ul>
 				</nav>
   				</div>
-  				
-			<table class="tablesorter" border="0" width="100%" style="font-size: 13px">
+						
+			<table class="tablesorter" border="0" width="100%" style="font-size: 13px;" data-page-size="4">
 				<thead>
 					<tr>
-						<th width="8%" style= "border: 0px  #212121;border-radius: 8px 0px 0px 0px"></th>
-						<th width="37%"><?php echo get_string('rowtittle', 'local_facebook'); ?></th>
-						<th width="20%"><?php echo get_string('rowdate', 'local_facebook'); ?></th>						
-						<th width="20%"><?php echo get_string('rowfrom', 'local_facebook'); ?></th>
-						<th width="8%" 	style= "border: 0px  #212121;border-radius: 0px 8px 0px 0px">Share</th>						
+						<th width="8%" style= "border-top-left-radius: 8px;"></th>
+						<th width="36%"><?php echo get_string('rowtittle', 'local_facebook'); ?></th>
+						<th width="23%"><?php echo get_string('rowdate', 'local_facebook'); ?></th>						
+						<th width="23%"><?php echo get_string('rowfrom', 'local_facebook'); ?></th>
+						<th width="9%" 	style= "border-radius: 0px 8px 0px 0px">Share</th>						
 					</tr>
 				</thead>
 				<tbody>
@@ -201,56 +202,73 @@ if ($userfacebookinfo != false) {
 				$discussionId = null;
 				if($data['course'] == $courseid){
 					$date = date("d/m/Y H:i", $data['date']);
-					echo '<tr><td><center>';
-					if($data['image'] == FACEBOOK_IMAGE_POST){
-						echo '<img src="images/post.png">';
-						$discussionId = $data['discussion'];
-					}
-					elseif($data['image'] == FACEBOOK_IMAGE_RESOURCE){
-						echo '<img src="images/resource.png">';
-					}					
-					elseif($data['image'] == FACEBOOK_IMAGE_LINK){
-						echo '<img src="images/link.png">';
-					}
-
+							echo '<tr><td ';
+							if ($data['date']>$lastvisit) {
+								echo 'style="margin-left:10px; border-left:3px solid #2a2a2a;"';
+							}
+							echo '><center>';	
+							if($data['image'] == FACEBOOK_IMAGE_POST){
+								echo '<img src="images/post.png">';
+								$discussionId = $data['discussion'];
+							}
+							elseif($data['image'] == FACEBOOK_IMAGE_RESOURCE){
+								echo '<img src="images/resource.png">';
+							}
+							elseif($data['image'] == FACEBOOK_IMAGE_LINK){
+								echo '<img src="images/link.png">';
+							}
+								
+							if($discussionId != null) {
+								echo '</center></td><td>';
+								if ($data['date']>$lastvisit) {
+									echo '<b><a href="#" discussionid="'.$discussionId.'" component="forum">'.$data['title'].'</a>
+									</td><td><b>'.$date.'</td><td style="font-size:13px"><b>'.$data ['from'].'</td></b>
+ 									<td><button type="button" class="btn btn-primary btn-sm" style="color:#E5E3FB">
+  									<img src="images/facebook_1.png" style="height: 70%; width: auto;"></img><b>| share
+									</b></button></td></tr>';
+								} else {
+									echo '<a href="#" discussionid="'.$discussionId.'" component="forum">'.$data['title'].'</a>
+									</td><td>'.$date.'</td><td style="font-size:13px">'.$data ['from'].'</td>
+									<td><button type="button" class="btn btn-default btn-sm" style="color:#909090">
+  									<img src="images/facebook_2.png" style="height: 70%; width: auto;"></img><b>| share
+									</b></button></td></tr>';
+								}
 					
-					if($discussionId != null) {
-						echo '</center></td><td><a href="#" discussionid="'.$discussionId.'" component="forum">'.$data['title'].'</a>
-									</td><td>'.$date.'</td><td style="font-size:11px"><b>'.$data ['from'].'</b></td></tr>';
-						
-						$postData = get_posts_from_discussion($discussionId);
-						?>
-						<!-- Modal -->
-						<div class="modal fade" id="m<?php echo $discussionId; ?>" tabindex="-1" role="dialog" aria-labelledby="modal">
-						  <div class="modal-dialog" role="document">
-						    <div class="modal-content">
-						      <div class="modal-body">
-						      <?php
-						        foreach($postData as $post) {
-						        	$date = $post['date'];
-						        	echo "<div align='left'>".$post['message']."</div>";
-						        	echo "<div align='right'>".$post['user'].", ".date('l d-F-Y', $date)."</div><br>";
-						        }
-						      ?>
-						      </div>
-						      <div class="modal-footer">
-						        <button type="button" class="btn btn-default" data-dismiss="modal" component="close-modal" modalid="<?php echo $discussionId; ?>">Close</button>
-						      </div>
-						    </div>
-						  </div>
-						</div>
-						<?php
-					} else {
-						echo '</center></td><td><a href="'.$data['link'].'" target="_blank">'.$data['title'].'</a>
-									</td><td style="font-size:11px"><b>'.$data ['from'].'</b></td><td>'.$date.'</td></tr>';
-					}
-				}
+								$postData = get_posts_from_discussion($discussionId);
+								?>
+											<!-- Modal -->
+											<div class="modal fade" id="m<?php echo $discussionId; ?>" tabindex="-1" role="dialog" aria-labelledby="modal">
+											  <div class="modal-dialog" role="document">
+											    <div class="modal-content">
+											      <div class="modal-body">
+											      <?php
+											        foreach($postData as $post) {
+											        	$date = $post['date'];
+											        	echo "<div align='left'>".$post['message']."</div>";
+											        	echo "<div align='right'>".$post['user'].", ".date('l d-F-Y', $date)."</div><br>";
+											        }
+											      ?>
+											      </div>
+											      <div class="modal-footer">
+											        <button type="button" class="btn btn-default" data-dismiss="modal" component="close-modal" modalid="<?php echo $discussionId; ?>">Close</button>
+											      </div>
+											    </div>
+											  </div>
+											</div>
+											<?php
+										} else {
+											echo '</center></td><td><a href="'.$data['link'].'" target="_blank">'.$data['title'].'</a>
+														</td><td>'.$date.'</td><td style="font-size:11px">'.$data ['from'].'</td></tr>';
+										}
+				}	
 			}
 		echo "</tbody></table></div></div>";
 	}
+
 	
 	?>
-	
+
+
 	<!-- Display engine -->
 	<script type="text/javascript">
 	var courseId = null;
