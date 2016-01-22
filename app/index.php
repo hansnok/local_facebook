@@ -220,7 +220,7 @@ if ($userfacebookinfo != false) {
 								
 							if($discussionId != null) {
 								echo '</center></td><td>';
-								if ($data['date']>$lastvisit) {
+								if($data['date']>$lastvisit) {
 									echo '<b><a href="#" discussionid="'.$discussionId.'" component="forum">'.$data['title'].'</a>
 									</td><td><b>'.$date.'</td><td style="font-size:13px"><b>'.$data ['from'].'</td></b>
  									<td><button type="button" class="btn btn-primary btn-sm" style="color:#E5E3FB">
