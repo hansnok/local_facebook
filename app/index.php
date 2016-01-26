@@ -188,11 +188,12 @@ if ($userfacebookinfo != false) {
 			<table class="tablesorter" border="0" width="100%" style="font-size: 13px;" data-page-size="4">
 				<thead>
 					<tr>
-						<th width="8%" style= "border-top-left-radius: 8px;"></th>
-						<th width="36%"><?php echo get_string('rowtittle', 'local_facebook'); ?></th>
-						<th width="23%"><?php echo get_string('rowdate', 'local_facebook'); ?></th>						
-						<th width="23%"><?php echo get_string('rowfrom', 'local_facebook'); ?></th>
-						<th width="9%" 	style= "border-radius: 0px 8px 0px 0px">Share</th>						
+						<th width="1%" style= "border-top-left-radius: 8px;"></th>
+						<th width="5%"></th>
+						<th width="33%"><?php echo get_string('rowtittle', 'local_facebook'); ?></th>
+						<th width="30%"><?php echo get_string('rowfrom', 'local_facebook'); ?></th>
+						<th width="20%"><?php echo get_string('rowdate', 'local_facebook'); ?></th>						
+						<th width="10%" style= "border-top-right-radius: 8px;">Share</th>						
 					</tr>
 				</thead>
 				<tbody>
@@ -202,11 +203,13 @@ if ($userfacebookinfo != false) {
 				$discussionId = null;
 				if($data['course'] == $courseid){
 					$date = date("d/m/Y H:i", $data['date']);
-							echo '<tr><td ';
+							echo '<tr courseid="'.$courseid.'"><td';
 							if ($data['date']>$lastvisit) {
-								echo 'style="margin-left:10px; border-left:3px solid #2a2a2a;"';
+								echo '><center><span class="glyphicon glyphicon-option-vertical" aria-hidden="true" style="color: #2a2a2a;"></span>&nbsp&nbsp';
+							}else{
+								echo '><center><span class="glyphicon glyphicon-option-vertical" aria-hidden="true" style="color: transparent;"></span>&nbsp&nbsp';
 							}
-							echo '><center>';	
+							echo'</td><td> ';
 							if($data['image'] == FACEBOOK_IMAGE_POST){
 								echo '<img src="images/post.png">';
 								$discussionId = $data['discussion'];
@@ -219,20 +222,21 @@ if ($userfacebookinfo != false) {
 							}
 								
 							if($discussionId != null) {
-								echo '</center></td><td>';
+								echo '</center></td><td';
 								if($data['date']>$lastvisit) {
-									echo '<b><a href="#" discussionid="'.$discussionId.'" component="forum">'.$data['title'].'</a>
-									</td><td><b>'.$date.'</td><td style="font-size:13px"><b>'.$data ['from'].'</td></b>
+									echo ' style="font-weight:bold;"><a href="#" discussionid="'.$discussionId.'" component="forum">'.$data['title'].'</a>
+									</td><td style="font-size:13px; font-weight:bold;">'.$data ['from'].'</td><td style="font-weight:bold;">'.$date.'</td>
  									<td><button type="button" class="btn btn-primary btn-sm" style="color:#E5E3FB">
-  									<img src="images/facebook_1.png" style="height: 70%; width: auto;"></img><b>| share
+  									<span class="glyphicon glyphicon-share-alt" aria-hidden="true"></span>&nbsp<b> share
 									</b></button></td></tr>';
 								} else {
-									echo '<a href="#" discussionid="'.$discussionId.'" component="forum">'.$data['title'].'</a>
-									</td><td>'.$date.'</td><td style="font-size:13px">'.$data ['from'].'</td>
-									<td><button type="button" class="btn btn-default btn-sm" style="color:#909090">
-  									<img src="images/facebook_2.png" style="height: 70%; width: auto;"></img><b>| share
+									echo '><a href="#" discussionid="'.$discussionId.'" component="forum">'.$data['title'].'</a>
+									</td><td style="font-size:13px">'.$data ['from'].'</td><td>'.$date.'</td>
+									<td> <button type="button" class="btn btn-default btn-sm" style="color:#909090;">
+  									<span class="glyphicon glyphicon-share-alt" aria-hidden="true"></span>&nbsp<b> share
 									</b></button></td></tr>';
 								}
+						
 					
 								$postData = get_posts_from_discussion($discussionId);
 								?>
@@ -258,7 +262,7 @@ if ($userfacebookinfo != false) {
 											<?php
 										} else {
 											echo '</center></td><td><a href="'.$data['link'].'" target="_blank">'.$data['title'].'</a>
-														</td><td>'.$date.'</td><td style="font-size:11px">'.$data ['from'].'</td></tr>';
+														</td><td style="font-size:11px">'.$data ['from'].'</td><td>'.$date.'</td><td></td></tr>';
 										}
 				}	
 			}
@@ -277,6 +281,10 @@ if ($userfacebookinfo != false) {
 	$("*", document.body).click(function(event) {
 		event.stopPropagation();
 
+		var courseid = $(this).parent().parent().attr('courseid');
+		var badgecourseid = $( "button[courseid='"+courseid+"']" ).parent().find('.badge');
+		var aclick = $(this).parent().attr('style');
+		
 		if(($(this).attr('component') == "button") && ($(this).attr('courseid') != courseId)) {
 			$('#c' + courseId).fadeOut(300);
 			courseId = $(this).attr('courseid');
@@ -286,7 +294,17 @@ if ($userfacebookinfo != false) {
 		else if($(this).attr('component') == "forum") {
 			discussionId = $(this).attr('discussionid');
 			$('#m' + discussionId).modal('show');
+			if(aclick == 'font-weight:bold;'){
+				$(this).parent().parent().children("td").css('font-weight','normal');
+				$(this).parent().parent().children("td").children("button").removeClass("btn btn-primary");
+				$(this).parent().parent().children("td").children("button").addClass("btn btn-default");
+				$(this).parent().parent().children("td").children("center").children("span").css('color','transparent');
+				$(this).parent().parent().children("td").children("button").css('color','#909090');
+				if(badgecourseid.text() == 1) { badgecourseid.remove(); }
+				else{ badgecourseid.text(badgecourseid.text()-1); }
+			}			
 		}
+		
 
 		else if($(this).attr('component') == "close-modal") {
 			modalId = $(this).attr('modalid');
