@@ -148,6 +148,7 @@ function get_total_notification($sqlin, $param, $lastvisit){
 	
 	return array($resourcepercourse, $urlpercourse, $totalpostpercourse);
 }
+
 /**
  * Sort the records by the field inside record.
  * @param array $records        	
@@ -455,3 +456,9 @@ function get_posts_from_discussion($discussionId) {
 	
 	return $data;
 }
+//function to reorganizes the courses by notifications
+function cmp($a, $b){
+	return strcmp ($b->totalnotifications, $a->totalnotifications);
+	
+}
+
