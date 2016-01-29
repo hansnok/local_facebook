@@ -185,14 +185,14 @@ if ($userfacebookinfo != false) {
 	
 	
 	echo "<div class='col-md-10 col-sm-9 col-xs-12'>";
+	echo"<div class='advert'><div style='position: relative;'><img src='images/jpg_an_1.jpg'style='margin-top:10%; margin-left:8%; width:35%'><img src='images/jpg_an_2.jpg' style='margin-top:10%; margin-left:5%; width:35%'></div></div>";
 	foreach($usercourse as $courses){
 			
 		$fullname = $courses->fullname;
 		$courseid = $courses->id;
 		
 		?>
-      	<div style="display: none;" id="c<?php echo $courseid; ?>">
-      		
+      	<div style="display: none;" id="c<?php echo $courseid; ?>">	
       		<div class="panel panel-default" style="margin-right:20px; margin-top:20px;">
       		
 			  	<div class="panel"><nav>
@@ -276,10 +276,10 @@ if ($userfacebookinfo != false) {
 							echo '</center></td><td';
 							if($data['date']>$lastvisit) {
 									echo ' style="font-weight:bold;"><a href="#" discussionid="'.$discussionId.'" component="forum">'.$data['title'].'</a>
-		 									</td><td style="font-size:13px; font-weight:bold;">'.$data ['from'].'</td><td style="font-weight:bold;">'.$date.'</td>
-		  									<td><button type="button" class="btn btn-primary btn-sm" style="color:#E5E3FB">
-		   									<span class="glyphicon glyphicon-share-alt" aria-hidden="true"></span>&nbsp<b> share
-		 									</b></button></td></tr>';
+		 							</td><td style="font-size:13px; font-weight:bold;">'.$data ['from'].'</td><td style="font-weight:bold;">'.$date.'</td>
+		  							<td><button type="button" class="btn btn-primary btn-sm" style="color:#E5E3FB">
+		   							<span class="glyphicon glyphicon-share-alt" aria-hidden="true"></span>&nbsp<b> share
+		 							</b></button></td></tr>';
 							} else {
 									echo '><a href="#" discussionid="'.$discussionId.'" component="forum">'.$data['title'].'</a>
  									</td><td style="font-size:13px">'.$data ['from'].'</td><td>'.$date.'</td>
@@ -299,8 +299,10 @@ if ($userfacebookinfo != false) {
 						      <?php
 						        foreach($postData as $post) {
 						        	$date = $post['date'];
-						        	echo "<div align='left'>".$post['message']."</div>";
-						        	echo "<div align='right'>".$post['user'].", ".date('l d-F-Y', $date)."</div><br>";
+						        	echo "<div align='left'style='background-color:#F2F2F2; border-radius: 4px 4px 0 0; padding:4px; color:#333333;'><img src='images/post.png'>
+									<b>&nbsp&nbsp".$data['title']."<br>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp".$post['user'].", ".date('l d-F-Y', $date)."</b></div>";
+						        	echo "<div align='left' style='border-radius: 0 0 4px 4px; 	word-wrap: break-word;'>".$post['message']."</div>";
+						        	echo "<br>";
 						        }
 						      ?>
 						      </div>
@@ -460,12 +462,12 @@ if ($userfacebookinfo != false) {
 					} else {
 						echo '</center></td><td';
 					if($data['date']>$lastvisit){
- 							echo ' style="font-weight:bold"><a href="'.$data['link'].'" target="_blank">'.$data['title'].'</a>
+ 							echo ' style="font-weight:bold"><a href="'.$data['link'].'" target="_blank" component="other">'.$data['title'].'</a>
  									</td><td style="font-size:13px; font-weight:bold;">'.$data ['from'].'</td><td style="font-size:14px; font-weight:bold;">'.$date.'</td><td><button type="button" class="btn btn-primary btn-sm" style="color:#E5E3FB;">
  									<span class="glyphicon glyphicon-share-alt" aria-hidden="true"></span>&nbsp<b> share
  									</b></button></td></tr>';
  						}else{
- 							echo '><a href="'.$data['link'].'" target="_blank">'.$data['title'].'</a>
+ 							echo '><a href="'.$data['link'].'" target="_blank" component="other">'.$data['title'].'</a>
  									</td><td style="font-size:13px">'.$data ['from'].'</td><td style="font-size:14px">'.$date.'</td><td><button type="button" class="btn btn-default btn-sm" style="color:#909090;">
  									<span class="glyphicon glyphicon-share-alt" aria-hidden="true"></span>&nbsp<b> share
  									</b></button></td></tr>';
@@ -491,11 +493,13 @@ if ($userfacebookinfo != false) {
 		var courseid = $(this).parent().parent().attr('courseid');
 		var badgecourseid = $( "button[courseid='"+courseid+"']" ).parent().find('.badge');
 		var aclick = $(this).parent().attr('style');
-
+		var advert = $(this).parent().parent().parent().parent().parent().find('.advert');
+		
 		if(($(this).attr('component') == "button") && ($(this).attr('courseid') != courseId)) {
 			$('#c' + courseId).fadeOut(300);
 			courseId = $(this).attr('courseid');
 			$('#c' + courseId).delay(300).fadeIn(300);
+			advert.remove(); 
 		}
 
 		else if($(this).attr('component') == "forum") {
@@ -564,6 +568,23 @@ if ($userfacebookinfo != false) {
 				 }
 			}
 		}
+		else if($(this).attr('component') == "other") {
+
+			if(aclick == 'font-weight:bold'){			
+				 $(this).parent().parent().children("td").css('font-weight','normal');
+				 $(this).parent().parent().children("td").children("button").removeClass("btn btn-primary");
+				 $(this).parent().parent().children("td").children("button").addClass("btn btn-default");
+				 $(this).parent().parent().children("td").children("center").children("span").css('color','transparent');
+				 $(this).parent().parent().children("td").children("button").css('color','#909090');
+				 				
+				 if(badgecourseid.text() == 1) { 
+				 	badgecourseid.remove(); 
+				 }
+				 else{ 
+				 	badgecourseid.text(badgecourseid.text()-1); 
+				 }
+			}
+		}
 	});
 
 	$("#search").on('change keyup paste', function() {
@@ -592,7 +613,12 @@ if ($userfacebookinfo != false) {
 	$DB->update_record('facebook_user', $userfacebookinfo);
 
 } else{
-	echo '<div class="cuerpo"><h1>'.get_string('existtittle', 'local_facebook').'</h1>
-		     <p>'.get_string('existtext', 'local_facebook').'<a  target="_blank" href="'.$connecturl.'" >'.get_string('existlink', 'local_facebook').'</a></p></div>';
-	include 'htmltoinclude/spacer.html';
+	echo'</div></div>';
+	echo '<div class="popup" role="dialog" aria-labelledby="modal">';
+	echo '<div class="cuerpo" style="margin:200px"><h1>'.get_string('existtittle', 'local_facebook').'</h1>
+			     <p>'.get_string('existtext', 'local_facebook').'<a  target="_blank" href="'.$connecturl.'" >'.get_string('existlink', 'local_facebook').'</a></p></div>';
+	echo '</div>';
+
+	include 'htmltoinclude/spacer.html';	
 }
+?>
