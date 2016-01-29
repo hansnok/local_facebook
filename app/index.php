@@ -227,9 +227,11 @@ if ($userfacebookinfo != false) {
  						<th width="5%"></th>
  						<th width="33%"><?php echo get_string('rowtittle', 'local_facebook'); ?></th>
  						<th width="30%"><?php echo get_string('rowfrom', 'local_facebook'); ?></th>
-  						<th width="20%"><?php echo get_string('rowdate', 'local_facebook'); ?></th>
-  						<th width="10%" style= "border-top-right-radius: 8px;">Share</th>	
-  						<th width="1%" style= "background-color:transparent"></th>					
+  						<th width="20%" style= "border-top-right-radius: 8px";><?php echo get_string('rowdate', 'local_facebook'); ?></th>
+    				
+<!-- 						<th width="10%" style= "border-top-right-radius: 8px;">Share</th>	-->	
+				
+  						<th width="1%" style= "background-color:transparent"></th>				
 					</tr>
 				</thead>
 				<tbody>
@@ -276,16 +278,18 @@ if ($userfacebookinfo != false) {
 							echo '</center></td><td';
 							if($data['date']>$lastvisit) {
 									echo ' style="font-weight:bold;"><a href="#" discussionid="'.$discussionId.'" component="forum">'.$data['title'].'</a>
-		 							</td><td style="font-size:13px; font-weight:bold;">'.$data ['from'].'</td><td style="font-weight:bold;">'.$date.'</td>
-		  							<td><button type="button" class="btn btn-primary btn-sm" style="color:#E5E3FB">
-		   							<span class="glyphicon glyphicon-share-alt" aria-hidden="true"></span>&nbsp<b> share
-		 							</b></button></td></tr>';
+		 							</td><td style="font-size:13px; font-weight:bold;">'.$data ['from'].'</td><td style="font-weight:bold;">'.$date.'</td>';
+//		  							<td><button type="button" class="btn btn-primary btn-sm" style="color:#E5E3FB">
+//		   							<span class="glyphicon glyphicon-share-alt" aria-hidden="true"></span>&nbsp<b> share
+//		 							</b></button></td>
+		 							echo'</tr>';
 							} else {
 									echo '><a href="#" discussionid="'.$discussionId.'" component="forum">'.$data['title'].'</a>
- 									</td><td style="font-size:13px">'.$data ['from'].'</td><td>'.$date.'</td>
- 									<td> <button type="button" class="btn btn-default btn-sm" style="color:#909090;">
-   									<span class="glyphicon glyphicon-share-alt" aria-hidden="true"></span>&nbsp<b> share
- 									</b></button></td></tr>';
+ 									</td><td style="font-size:13px">'.$data ['from'].'</td><td>'.$date.'</td>';
+// 									<td> <button type="button" class="btn btn-default btn-sm" style="color:#909090;">
+//  									<span class="glyphicon glyphicon-share-alt" aria-hidden="true"></span>&nbsp<b> share
+// 									</b></button></td><
+ 									echo '</tr>';
 								}
 					
 						
@@ -299,7 +303,7 @@ if ($userfacebookinfo != false) {
 						      <?php
 						        foreach($postData as $post) {
 						        	$date = $post['date'];
-						        	echo "<div align='left'style='background-color:#F2F2F2; border-radius: 4px 4px 0 0; padding:4px; color:#333333;'><img src='images/post.png'>
+						        	echo "<div align='left'style='background-color:#e6e6e6; border-radius: 4px 4px 0 0; padding:4px; color:#333333;'><img src='images/post.png'>
 									<b>&nbsp&nbsp".$data['title']."<br>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp".$post['user'].", ".date('l d-F-Y', $date)."</b></div>";
 						        	echo "<div align='left' style='border-radius: 0 0 4px 4px; 	word-wrap: break-word;'>".$post['message']."</div>";
 						        	echo "<br>";
@@ -317,14 +321,18 @@ if ($userfacebookinfo != false) {
 						echo '</center></td><td';
 						if($data['date']>$lastvisit){
 							echo ' style="font-weight:bold"><a href="#" emarkingid="'.$markid.'" component="emarking">'.$data['title'].'</a>
- 							</td><td style="font-size:13px; font-weight:bold;">'.$data ['from'].'</td><td style="font-size:14px; font-weight:bold;">'.$date.'</td><td><button type="button" class="btn btn-primary btn-sm" style="color:#E5E3FB;">
- 							<span class="glyphicon glyphicon-share-alt" aria-hidden="true"></span>&nbsp<b> share
- 							</b></button></td></tr>';
+ 							</td><td style="font-size:13px; font-weight:bold;">'.$data ['from'].'</td>';
+// 							<td style="font-size:14px; font-weight:bold;">'.$date.'</td><td><button type="button" class="btn btn-primary btn-sm" style="color:#E5E3FB;">
+// 							<span class="glyphicon glyphicon-share-alt" aria-hidden="true"></span>&nbsp<b> share
+// 							</b></button></td>
+ 							echo'</tr>';
 						}else{
 							echo '><a href="#" emarkingid="'.$markid.'" component="emarking">'.$data['title'].'</a>
- 							</td><td style="font-size:13px">'.$data ['from'].'</td><td style="font-size:14px">'.$date.'</td><td><button type="button" class="btn btn-default btn-sm" style="color:#909090;">
- 							<span class="glyphicon glyphicon-share-alt" aria-hidden="true"></span>&nbsp<b> share
- 							</b></button></td></tr>';
+ 							</td><td style="font-size:13px">'.$data ['from'].'</td><td style="font-size:14px">'.$date.'</td>';
+// 							<td><button type="button" class="btn btn-default btn-sm" style="color:#909090;">
+// 							<span class="glyphicon glyphicon-share-alt" aria-hidden="true"></span>&nbsp<b> share
+// 							</b></button></td>
+ 							echo '</tr>';
 						}
 						?>
 						<!-- Modal -->
@@ -385,13 +393,17 @@ if ($userfacebookinfo != false) {
 					echo '</center></td><td';
 						if($data['date']>$lastvisit) {
 						echo ' style="font-weight:bold"><a href="#" assignid="'.$assignid.'" component="assign">'.$data['title'].'</a>
-									</td><td style="font-size:13px; font-weight:bold;"></td><td style="font-size:14px; font-weight:bold;">'.$date.'</td><td><button type="button" class="btn btn-primary btn-sm" style="color:#E5E3FB;">
-   						<span class="glyphicon glyphicon-share-alt" aria-hidden="true"></span>&nbsp<b> share</b></button></td></tr>';
+//									</td><td style="font-size:13px; font-weight:bold;"></td><td style="font-size:14px; font-weight:bold;">'.$date.'</td>';
+//									<td><button type="button" class="btn btn-primary btn-sm" style="color:#E5E3FB;">
+//   									<span class="glyphicon glyphicon-share-alt" aria-hidden="true"></span>&nbsp<b> share</b></button></td>
+   						echo'</tr>';
 						}
 						else{
 						echo '><a href="#" assignid="'.$assignid.'" component="assign">'.$data['title'].'</a>
-									</td><td style="font-size:13px"></td><td>'.$date.'</td><td style="font-size:14px"><button type="button" class="btn btn-default btn-sm" style="color:#909090;">
-   						<span class="glyphicon glyphicon-share-alt" aria-hidden="true"></span>&nbsp<b> share</b></button></td></tr>';
+									</td><td style="font-size:13px"></td><td>'.$date.'</td>';
+//									<td style="font-size:14px"><button type="button" class="btn btn-default btn-sm" style="color:#909090;">
+//   						            <span class="glyphicon glyphicon-share-alt" aria-hidden="true"></span>&nbsp<b> share</b></button></td>
+   						            echo'</tr>';
 						}
 						
 						?>
@@ -463,14 +475,18 @@ if ($userfacebookinfo != false) {
 						echo '</center></td><td';
 					if($data['date']>$lastvisit){
  							echo ' style="font-weight:bold"><a href="'.$data['link'].'" target="_blank" component="other">'.$data['title'].'</a>
- 									</td><td style="font-size:13px; font-weight:bold;">'.$data ['from'].'</td><td style="font-size:14px; font-weight:bold;">'.$date.'</td><td><button type="button" class="btn btn-primary btn-sm" style="color:#E5E3FB;">
- 									<span class="glyphicon glyphicon-share-alt" aria-hidden="true"></span>&nbsp<b> share
- 									</b></button></td></tr>';
+ 									</td><td style="font-size:13px; font-weight:bold;">'.$data ['from'].'</td><td style="font-size:14px; font-weight:bold;">'.$date.'</td>';
+// 									<td><button type="button" class="btn btn-primary btn-sm" style="color:#E5E3FB;">
+// 									<span class="glyphicon glyphicon-share-alt" aria-hidden="true"></span>&nbsp<b> share
+// 									</b></button></td>
+							echo '</tr>';
  						}else{
  							echo '><a href="'.$data['link'].'" target="_blank" component="other">'.$data['title'].'</a>
- 									</td><td style="font-size:13px">'.$data ['from'].'</td><td style="font-size:14px">'.$date.'</td><td><button type="button" class="btn btn-default btn-sm" style="color:#909090;">
- 									<span class="glyphicon glyphicon-share-alt" aria-hidden="true"></span>&nbsp<b> share
- 									</b></button></td></tr>';
+ 									</td><td style="font-size:13px">'.$data ['from'].'</td><td style="font-size:14px">'.$date.'</td>';
+// 									<td><button type="button" class="btn btn-default btn-sm" style="color:#909090;">
+// 									<span class="glyphicon glyphicon-share-alt" aria-hidden="true"></span>&nbsp<b> share
+// 									</b></button></td>
+ 							echo '</tr>';
 					}
 					}
 				}
@@ -510,8 +526,8 @@ if ($userfacebookinfo != false) {
 			if(aclick == 'font-weight:bold;'){
 				
 				$(this).parent().parent().children("td").css('font-weight','normal');
-				$(this).parent().parent().children("td").children("button").removeClass("btn btn-primary");
-				$(this).parent().parent().children("td").children("button").addClass("btn btn-default");
+//				$(this).parent().parent().children("td").children("button").removeClass("btn btn-primary");
+//				$(this).parent().parent().children("td").children("button").addClass("btn btn-default");
 				$(this).parent().parent().children("td").children("center").children("span").css('color','transparent');
 				$(this).parent().parent().children("td").children("button").css('color','#909090');
 				
@@ -535,8 +551,8 @@ if ($userfacebookinfo != false) {
 
 			if(aclick == 'font-weight:bold'){			
 				 $(this).parent().parent().children("td").css('font-weight','normal');
-				 $(this).parent().parent().children("td").children("button").removeClass("btn btn-primary");
-				 $(this).parent().parent().children("td").children("button").addClass("btn btn-default");
+//				 $(this).parent().parent().children("td").children("button").removeClass("btn btn-primary");
+//				 $(this).parent().parent().children("td").children("button").addClass("btn btn-default");
 				 $(this).parent().parent().children("td").children("center").children("span").css('color','transparent');
 				 $(this).parent().parent().children("td").children("button").css('color','#909090');
 				 				
@@ -555,8 +571,8 @@ if ($userfacebookinfo != false) {
 
 			if(aclick == 'font-weight:bold'){			
 				 $(this).parent().parent().children("td").css('font-weight','normal');
-				 $(this).parent().parent().children("td").children("button").removeClass("btn btn-primary");
-				 $(this).parent().parent().children("td").children("button").addClass("btn btn-default");
+//				 $(this).parent().parent().children("td").children("button").removeClass("btn btn-primary");
+//				 $(this).parent().parent().children("td").children("button").addClass("btn btn-default");
 				 $(this).parent().parent().children("td").children("center").children("span").css('color','transparent');
 				 $(this).parent().parent().children("td").children("button").css('color','#909090');
 				 				
@@ -572,8 +588,8 @@ if ($userfacebookinfo != false) {
 
 			if(aclick == 'font-weight:bold'){			
 				 $(this).parent().parent().children("td").css('font-weight','normal');
-				 $(this).parent().parent().children("td").children("button").removeClass("btn btn-primary");
-				 $(this).parent().parent().children("td").children("button").addClass("btn btn-default");
+//				 $(this).parent().parent().children("td").children("button").removeClass("btn btn-primary");
+//				 $(this).parent().parent().children("td").children("button").addClass("btn btn-default");
 				 $(this).parent().parent().children("td").children("center").children("span").css('color','transparent');
 				 $(this).parent().parent().children("td").children("button").css('color','#909090');
 				 				
