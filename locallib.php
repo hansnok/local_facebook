@@ -507,20 +507,20 @@ function invite_to_facebook($users){
 	
 	foreach($users as $addressee){
 		
-		//$invitationdata = new stdClass();
-		$invitationdata = new \core\message\message();
+		$invitationdata = new stdClass();
+		//$invitationdata = new \core\message\message();
 		$invitationdata->component = 'local_facebook'; // your component name
 		$invitationdata->name = 'invitationmessage'; // this is the message name from messages.php
-		$invitationdata->userfrom = $USER->id;
+		$invitationdata->userfrom = $userfrom;
 		$invitationdata->userto = $addressee;
 		$invitationdata->subject = get_string('mailtitle','local_facebook');
 		$invitationdata->fullmessage = get_string("mailmessage", "local_facebook");
 		$invitationdata->fullmessageformat = FORMAT_MARKDOWN;
-		$invitationdata->fullmessagehtml = 'NULL';
-		$invitationdata->smallmessage = 'NULL';
-		$invitationdata->notification = 1; // this is only set to 0 for personal messages between users
-		$invitationdata->contexturl = 'NULL';
-		$invitationdata->contexturlname = 'NULL';
+		$invitationdata->fullmessagehtml = '<p>'.get_string("mailmessage", "local_facebook").'</p>';
+		$invitationdata->smallmessage = get_string('mailtitle','local_facebook');
+		$invitationdata->notification = '0'; // this is only set to 0 for personal messages between users
+		//$invitationdata->contexturl = '';
+		//$invitationdata->contexturlname = '';
 		//$invitationdata->replyto = "noreply@uai.cl";
 		$messageid = message_send($invitationdata);
 	}

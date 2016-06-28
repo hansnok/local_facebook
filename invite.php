@@ -76,7 +76,7 @@ $tableheadings = array(get_string('lastname','local_facebook'), get_string('firs
 		get_string('email','local_facebook'), get_string('linked','local_facebook'));
 
 echo $OUTPUT->header ();
-echo 'alo is';
+echo 'alo si';
 //adds each student and their status to a table row
 foreach($facebookstatus AS $statusdata){
 	$tablerow = array();
