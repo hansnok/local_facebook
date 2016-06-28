@@ -50,7 +50,8 @@ $cid = required_param('cid', PARAM_INT);
 $invite = optional_param('inv', '0', PARAM_INT);
 
 //brings the students of the course and their connection status with facebook
-$facebookstatussql = 'SELECT u.lastname,
+$facebookstatussql = 'SELECT u.id,
+		u.lastname,
 		u.firstname,
 		u.email,
 		u.username,
@@ -89,6 +90,7 @@ foreach($facebookstatus AS $statusdata){
 		//stores the email and the user name of students not connected with facebook
 		$emails[] = $statusdata->email;
 		$users[] = $statusdata->username;
+		$usersid[] = $statusdata->id;
 	}else{
 		$tablerow[] = $check;
 	}
@@ -110,8 +112,7 @@ echo html_writer::table($table);
 
 //runs the invite function
 if($invite == 1){
-	invite_to_facebook($emails);
+	invite_to_facebook($usersid);
 }
-var_dump($emails);
 
 echo $OUTPUT->footer ();
