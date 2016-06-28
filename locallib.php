@@ -518,11 +518,11 @@ function invite_to_facebook($users){
 		$invitationdata->fullmessageformat = FORMAT_MARKDOWN;
 		$invitationdata->fullmessagehtml = '<p>'.get_string("mailmessage", "local_facebook").'</p>';
 		$invitationdata->smallmessage = get_string('mailtitle','local_facebook');
-		$invitationdata->notification = '0'; // this is only set to 0 for personal messages between users
+		$invitationdata->notification = '1'; // this is only set to 0 for personal messages between users
 		//$invitationdata->contexturl = '';
 		//$invitationdata->contexturlname = '';
 		//$invitationdata->replyto = "noreply@uai.cl";
-		$messageid = message_send($invitationdata);
+		message_send($invitationdata);
 	}
 	echo "<script type='text/javascript'>alert('$alertmessage');</script>";
 }
