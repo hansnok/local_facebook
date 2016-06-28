@@ -500,16 +500,18 @@ function cmp($a, $b){
 
 function invite_to_facebook($users){
 	global $USER;
+	$userfrom = core_user::get_noreply_user();
+	$userfrom->maildisplay = true;
 	
 	$alertmessage = get_string('messagesucces','local_facebook');
 	
 	foreach($users as $addressee){
 		
-		//$invitationdata = new stdClass();
-		$invitationdata = new \core\message\message();
+		$invitationdata = new stdClass();
+		//$invitationdata = new \core\message\message();
 		$invitationdata->component = "local_facebook"; // your component name
 		$invitationdata->name = "invitationmessage"; // this is the message name from messages.php
-		$invitationdata->userfrom = $USER;
+		$invitationdata->userfrom = $userfrom;
 		$invitationdata->userto = $addressee;
 		$invitationdata->subject = get_string('mailtitle','local_facebook');
 		$invitationdata->fullmessage = get_string("mailmessage", "local_facebook");
@@ -517,7 +519,7 @@ function invite_to_facebook($users){
 		$invitationdata->fullmessagehtml = "";
 		$invitationdata->smallmessage = "";
 		$invitationdata->notification = 1; // this is only set to 0 for personal messages between users
-		$invitationdata->replyto = "noreply@uai.cl";
+		//$invitationdata->replyto = "noreply@uai.cl";
 		message_send($invitationdata);
 	}
 	echo "<script type='text/javascript'>alert('$alertmessage');</script>";
