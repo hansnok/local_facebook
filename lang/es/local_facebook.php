@@ -86,3 +86,4 @@ $string['backtocourse'] = 'Volver al curso';
 $string['mailtitle'] = 'Enlaza tu cuenta de facebook con WebC';
 $string['mailmessage'] = 'Enlaza tu cuenta de facebook con WebC para recibir las últimas noticias y notificaciones sobre tus clases';
 $string['messagesucces'] = 'Correo enviado exitosamente';
+$string['messageprovider:invitationmessage'] = 'Notificación de Invitacion';

@@ -17,8 +17,8 @@
 /**
  * 
  *
- * You can have a rather longer description of the file as well,
- * if you like, and it can span multiple lines.
+ * 
+ * 
  *
  * @package    local
  * @subpackage facebook
@@ -45,7 +45,7 @@ $PAGE->set_pagelayout("standard");
 $PAGE->set_title(get_string("invitetitle", "local_facebook"));
 $PAGE->navbar->add(get_string("facebook", "local_facebook"));
 
-//takes the course id from the URL
+//takes the course id and the invite parameter from the URL
 $cid = required_param('cid', PARAM_INT);
 $invite = optional_param('inv', '0', PARAM_INT);
 
@@ -61,7 +61,7 @@ $facebookstatussql = 'SELECT u.lastname,
 		INNER JOIN {user} AS u ON u.id = ra.userid
 		INNER JOIN {role} AS r ON r.id = ra.roleid
 		LEFT JOIN {facebook_user} AS f ON u.id = f.moodleid
-		WHERE c.id = ? AND r.id = 5';
+		WHERE c.id = ? AND r.archetype = "student"';
 
 $facebookstatus = $DB->get_records_sql($facebookstatussql, array($cid));
 
@@ -75,7 +75,7 @@ $tableheadings = array(get_string('lastname','local_facebook'), get_string('firs
 		get_string('email','local_facebook'), get_string('linked','local_facebook'));
 
 echo $OUTPUT->header ();
-
+echo "alo si";
 //adds each student and their status to a table row
 foreach($facebookstatus AS $statusdata){
 	$tablerow = array();
@@ -85,7 +85,8 @@ foreach($facebookstatus AS $statusdata){
 	$tablerow[] = $statusdata->email;
 	if($statusdata->status != 1){
 		$tablerow[] = $cross;
-		//stores the emails of students not connected with facebook
+		
+		//stores the email and the user name of students not connected with facebook
 		$emails[] = $statusdata->email;
 		$users[] = $statusdata->username;
 	}else{
@@ -94,7 +95,7 @@ foreach($facebookstatus AS $statusdata){
 	$tabledata[] = $tablerow;
 }
 
-//button to send invitation by email
+//button send invitation by email
 $reload =  new moodle_url("/local/facebook/invite.php",array('cid' => $cid, 'inv' => 1));
 echo $OUTPUT->single_button($reload, get_string('invitebutton','local_facebook'));
 
