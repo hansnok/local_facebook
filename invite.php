@@ -113,7 +113,6 @@ echo html_writer::table($table);
 //runs the invite function
 if($invite == 1){
 	invite_to_facebook($usersid);
-	
 }
 
 echo $OUTPUT->footer ();
