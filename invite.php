@@ -110,8 +110,8 @@ echo html_writer::table($table);
 
 //runs the invite function
 if($invite == 1){
-	invite_to_facebook($users);
+	invite_to_facebook($emails);
 }
-var_dump($users);
+var_dump($emails);
 
 echo $OUTPUT->footer ();
