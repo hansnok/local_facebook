@@ -515,9 +515,9 @@ function invite_to_facebook($users){
 		$invitationdata->userto = $addressee;
 		$invitationdata->subject = get_string('mailtitle','local_facebook');
 		$invitationdata->fullmessage = get_string("mailmessage", "local_facebook");
-		$invitationdata->fullmessageformat = FORMAT_MARKDOWN;
-		$invitationdata->fullmessagehtml = '<p>'.get_string("mailmessage", "local_facebook").'</p>';
-		$invitationdata->smallmessage = get_string('mailtitle','local_facebook');
+		$invitationdata->fullmessageformat = FORMAT_PLAIN;
+		$invitationdata->fullmessagehtml = ''; //<p>'.get_string("mailmessage", "local_facebook").'</p>
+		$invitationdata->smallmessage = ''; //get_string('mailtitle','local_facebook')
 		$invitationdata->notification = '1'; // this is only set to 0 for personal messages between users
 		//$invitationdata->contexturl = '';
 		//$invitationdata->contexturlname = '';
