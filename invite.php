@@ -112,5 +112,6 @@ echo html_writer::table($table);
 if($invite == 1){
 	invite_to_facebook($users);
 }
+var_dump($users);
 
 echo $OUTPUT->footer ();
