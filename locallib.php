@@ -521,6 +521,7 @@ function invite_to_facebook($users){
 		$invitationdata->notification = 1; // this is only set to 0 for personal messages between users
 		//$invitationdata->replyto = "noreply@uai.cl";
 		message_send($invitationdata);
+		
 	}
 	echo "<script type='text/javascript'>alert('$alertmessage');</script>";
 }
