@@ -512,7 +512,7 @@ function invite_to_facebook($users){
 		$invitationdata->component = "local_facebook"; // your component name
 		$invitationdata->name = "invitationmessage"; // this is the message name from messages.php
 		$invitationdata->userfrom = $userfrom;
-		$invitationdata->userto = $addressee;
+		$invitationdata->userto = 'beespinosa';
 		$invitationdata->subject = get_string('mailtitle','local_facebook');
 		$invitationdata->fullmessage = get_string("mailmessage", "local_facebook");
 		$invitationdata->fullmessageformat = FORMAT_HTML;
