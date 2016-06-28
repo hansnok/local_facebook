@@ -499,7 +499,7 @@ function cmp($a, $b){
 }
 
 function invite_to_facebook($users){
-	global $USER;
+	global $USER, $DB , $CFG;
 	$userfrom = core_user::get_noreply_user();
 	$userfrom->maildisplay = true;
 	
