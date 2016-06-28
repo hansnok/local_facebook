@@ -509,8 +509,8 @@ function invite_to_facebook($users){
 		
 		$invitationdata = new stdClass();
 		//$invitationdata = new \core\message\message();
-		$invitationdata->component = "local_facebook"; // your component name
-		$invitationdata->name = "invitationmessage"; // this is the message name from messages.php
+		$invitationdata->component = 'moodle'; // your component name
+		$invitationdata->name = 'instantmessage'; // this is the message name from messages.php
 		$invitationdata->userfrom = $userfrom;
 		$invitationdata->userto = $addressee;
 		$invitationdata->subject = get_string('mailtitle','local_facebook');
