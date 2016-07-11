@@ -87,9 +87,7 @@ foreach($facebookstatus AS $statusdata){
 	if($statusdata->status != 1){
 		$tablerow[] = $cross;
 		
-		//stores the email and the user name of students not connected with facebook
-		$emails[] = $statusdata->email;
-		$users[] = $statusdata->username;
+		//stores the ids of students not connected with facebook
 		$usersid[] = $statusdata->id;
 	}else{
 		$tablerow[] = $check;
