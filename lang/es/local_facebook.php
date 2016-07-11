@@ -21,6 +21,7 @@
  * @package    local
  * @subpackage facebook
  * @copyright  2013 Francisco GarcÃ­a Ralph (francisco.garcia.ralph@gmail.com)
+ * @copyright  2016 Benjamin Espinosa (beespinosa94@gmail.com)
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 $string['messageprovider:notification'] = 'Notificaciones de recursos (pdf, excel, word, url, etc)';
@@ -84,6 +85,6 @@ $string['firstname'] = 'Nombre';
 $string['email'] = 'Email';
 $string['backtocourse'] = 'Volver al curso';
 $string['mailtitle'] = 'Enlaza tu cuenta de facebook con WebC';
-$string['mailmessage'] = 'Enlaza tu cuenta de facebook con WebC para recibir las últimas noticias y notificaciones sobre tus clases. webcursos.uai.cl/local/facebook/connect.php';
+$string['mailmessage'] = 'Enlaza tu cuenta de facebook con WebC para recibir las ï¿½ltimas noticias y notificaciones sobre tus clases. webcursos.uai.cl/local/facebook/connect.php';
 $string['messagesucces'] = 'Correo enviado exitosamente';
-$string['messageprovider:invitationmessage'] = 'Notificación de Invitacion';
+$string['messageprovider:invitationmessage'] = 'Notificaciï¿½n de Invitacion';

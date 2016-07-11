@@ -21,6 +21,7 @@
  * @package    local
  * @subpackage facebook
  * @copyright  2013 Francisco García Ralph (francisco.garcia.ralph@gmail.com)
+ * @copyright  2016 Benjamin Espinosa (beespinosa94@gmail.com)
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 $string['messageprovider:notification'] = 'Notification of resources (pdf, excel, word, url, etc)';
