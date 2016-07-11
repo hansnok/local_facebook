@@ -20,6 +20,7 @@
  * @copyright  2015 Mihail Pozarski (mipozarski@alumnos.uai.cl)
  * @copyright  2015 Hans Jeria (hansjeria@gmail.com)
  * @copyright  2016 Mark Michaelsen (mmichaelsen678@gmail.com)
+ * @copyright  2016 Benjamin Espinosa (beespinosa94@gmail.com)
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 defined('MOODLE_INTERNAL') || die();
