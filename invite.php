@@ -16,10 +16,6 @@
 
 /**
  * 
- *
- * 
- * 
- *
  * @package    local
  * @subpackage facebook
  * @copyright  2016 Benjamin Espinosa (beespinosa94@gmail.com)
@@ -31,23 +27,30 @@ require_once ($CFG->dirroot."/local/facebook/forms.php");
 
 global $DB, $USER, $CFG;
 
+//takes the course id and the invite parameter from the URL
+$cid = required_param('cid', PARAM_INT);
+$invite = optional_param('inv', '0', PARAM_INT);
+
 require_login();
 
+if (! $course = $DB->get_record("course", array(
+		"id" => $cid))) {
+		print_error(get_string("invalidcourseid", "local_facebook"));
+}
+
 //set the URL
-$url = new moodle_url("/local/facebook/invite.php");
+$url = new moodle_url("/local/facebook/invite.php", array(
+		"course" => $cid));
 
 //set the context
 $context = context_system::instance ();
 
 $PAGE->set_url($url);
 $PAGE->set_context($context);
-$PAGE->set_pagelayout("standard");
+$PAGE->set_course($course);
 $PAGE->set_title(get_string("invitetitle", "local_facebook"));
+$PAGE->set_pagelayout("incourse");
 $PAGE->navbar->add(get_string("facebook", "local_facebook"));
-
-//takes the course id and the invite parameter from the URL
-$cid = required_param('cid', PARAM_INT);
-$invite = optional_param('inv', '0', PARAM_INT);
 
 //brings the students of the course and their connection status with facebook
 $facebookstatussql = 'SELECT u.id,

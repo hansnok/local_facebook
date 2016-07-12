@@ -88,3 +88,4 @@ $string['mailtitle'] = 'Link your facebook account with WebC';
 $string['mailmessage'] = 'Link your facebook account with WebC to receive the latest news and notifications about your classes. webcursos.uai.cl/local/facebook/connect.php';
 $string['messagesucces'] = 'Mail sent successfully';
 $string['messageprovider:invitationmessage'] = 'Notice of invitation';
+$string ['invalidcourseid'] = 'Invalid course Id';

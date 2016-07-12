@@ -87,4 +87,5 @@ $string['backtocourse'] = 'Volver al curso';
 $string['mailtitle'] = 'Enlaza tu cuenta de facebook con WebC';
 $string['mailmessage'] = 'Enlaza tu cuenta de facebook con WebC para recibir las �ltimas noticias y notificaciones sobre tus clases. webcursos.uai.cl/local/facebook/connect.php';
 $string['messagesucces'] = 'Correo enviado exitosamente';
-$string['messageprovider:invitationmessage'] = 'Notificaci�n de Invitacion';
+$string['messageprovider:invitationmessage'] = 'Notificación de Invitacion';
+$string ['invalidcourseid'] = 'Id del curso inválido';
