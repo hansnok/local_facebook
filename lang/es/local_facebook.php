@@ -89,3 +89,4 @@ $string['mailmessage'] = 'Enlaza tu cuenta de facebook con WebC para recibir las
 $string['messagesucces'] = 'Correo enviado exitosamente';
 $string['messageprovider:invitationmessage'] = 'Notificación de Invitacion';
 $string ['invalidcourseid'] = 'Id del curso inválido';
+$string['privacypolicies'] = 'Politicas de privacidad';
