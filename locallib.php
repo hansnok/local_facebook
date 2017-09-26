@@ -836,3 +836,8 @@ function paperattendance_convertdate($i) {
 	$dateconverted = date('H:i',$i)." - ".$days [date ( 'w', $i )] . ", " . date ( 'd', $i ) . get_string ( 'of', 'local_paperattendance').$months[date('n',$i)].get_string('from', 'local_paperattendance').date('Y',$i);
 	return $dateconverted;
 }
+function facebook_isthisfirsttime($moodleid){
+	global $DB;
+	$lasttimechecked = $DB->get_record('facebook_user', array('moodleid'=>$moodleid));
+	return $lasttimechecked;
+}
